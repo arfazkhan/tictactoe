@@ -9,7 +9,7 @@ Welcome to the Tic-Tac-Toe React project! This is a simple yet entertaining impl
 - [Contributing](#contributing)
 
 ## Demo
-You can see a live demo of the Tic-Tac-Toe game by visiting the following link: [Tic-Tac-Toe Demo](hhttps://tictactoe-pink-rho.vercel.app/)
+You can see a live demo of the Tic-Tac-Toe game by visiting the following link: [Tic-Tac-Toe Demo](https://tictactoe-pink-rho.vercel.app/)
 
 ## Getting Started
 Before you begin, make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) (Node Package Manager) installed on your system. If you haven't already, you can download and install them from the provided links.
