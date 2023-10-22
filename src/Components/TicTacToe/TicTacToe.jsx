@@ -6,9 +6,9 @@ import cross_icon from '../Assets/cross.png'
 let data=["","","","","","","","",""]
 
 const TicTacToe = () => {
-
     let [count, setCount] = useState(0);
-    let [lock, setLock] =useState(false);
+    let [lock, setLock] = useState(false);
+    let [currentPlayer, setCurrentPlayer] = useState('X'); // Add currentPlayer state
     let titleRef = useRef(null);
     let box1 = useRef(null);
     let box2 = useRef(null);
@@ -20,26 +20,26 @@ const TicTacToe = () => {
     let box8 = useRef(null);
     let box9 = useRef(null);
 
-    let box_array = [box1,box2,box3,box4,box5,box6,box7,box8,box9];
+    let box_array = [box1, box2, box3, box4, box5, box6, box7, box8, box9];
 
     const toggle = (e, num) => {
         if (lock) {
             return 0;
         }
-        if(count%2===0)
-        {
-            e.target.innerHTML = `<img src= '${cross_icon}'>`;
-            data [num]="x";
+        if (data[num] === "") {
+            if (currentPlayer === 'X') {
+                e.target.innerHTML = `<img src='${cross_icon}'>`;
+                data[num] = "X";
+                setCurrentPlayer('O');
+            } else {
+                e.target.innerHTML = `<img src='${circle_icon}'>`;
+                data[num] = "O";
+                setCurrentPlayer('X');
+            }
             setCount(++count);
+            checkWin();
         }
-        else {
-            e.target.innerHTML = `<img src= '${circle_icon}'>`;
-            data [num]="o";
-            setCount(++count);
-        }
-        checkWin()
     }
-
     const checkWin = () => {
         if (data[0]===data[1] && data[1]===data[2] && data[2]!=="")
         {
@@ -86,7 +86,7 @@ const TicTacToe = () => {
     }
     const won = (winner) => {
         setLock(true);
-        if (winner=="x")
+        if (winner==="x")
         {
             titleRef.current.innerHTML= `Congratulations: <img src=${cross_icon}> Wins`
         }
@@ -105,10 +105,12 @@ const TicTacToe = () => {
         })
     }
 
-  return (
-    <div className='container'>
-        <h1 className="title" ref={titleRef}>_Tic.<span>Tac</span>.Toe_</h1>
-        <div className='board'>
+    
+    return (
+        <div className='container'>
+            <h1 className="title" ref={titleRef}>_Tic.<span>Tac</span>.Toe_</h1>
+            <p className="current-player">Current Player: <img src={currentPlayer === 'X' ? cross_icon : circle_icon} /></p> {/* Display current player */}
+            <div className='board'>
             <div className="row1">
                 <div className="boxes" ref={box1} onClick={(e)=>{toggle(e,0)}}></div>
                 <div className="boxes" ref={box2} onClick={(e)=>{toggle(e,1)}}></div>
@@ -126,9 +128,9 @@ const TicTacToe = () => {
             </div>
 
         </div>
-        <button className="reset" onClick={()=>{reset()}}>Reset</button>
-    </div>
-  )
+        <button className="reset" onClick={() => { reset() }}>Reset</button>
+        </div>
+    )
 }
 
 export default TicTacToe
